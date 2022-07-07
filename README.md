@@ -11,6 +11,7 @@ API for performing CRUD operations. Main roles are users and admins.
 **Users Can Not**:
 1. Show other users' data.
 2. Update or Delete other users' data.
+3. Show system logs.
 
 **Admins Can**:
 1. Show logs of the system.
