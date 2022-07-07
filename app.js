@@ -29,6 +29,6 @@ server.use((req, res, next) => {
 
 // Error handling Middleware
 server.use((error, req, res, next) => {
-    let statusCode = error.statusCode;
-    res.status(statusCode).json({ message: error });
+    let statusCode = error.status;
+    res.status(500).json({ message: "Error " + error });
 });
