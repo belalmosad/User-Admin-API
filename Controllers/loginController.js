@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../Models/User');
+const jwt = require('jsonwebtoken');
+
 module.exports = (req, res, next) => {
     User.findOne({ email: req.body.email})
         .then((data) => {
@@ -9,7 +11,12 @@ module.exports = (req, res, next) => {
                 bcrypt.compare(req.body.password, data.password)
                 .then((isEqual) => {
                     if(isEqual) {
-                        res.status(200).json({message: 'Welcome', data});
+                        let token = jwt.sign({
+                            id: data.id,
+                            role: 'user'
+
+                        },process.env.SECRET_KEY, {expiresIn: "2h"})
+                        res.status(200).json({message: 'Welcome', token});
                     } else {
                         throw new Error('Incorrect Email Or Password');
                     }
