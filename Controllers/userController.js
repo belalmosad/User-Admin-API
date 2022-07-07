@@ -12,3 +12,15 @@ module.exports.addUser = (req, res, next) => {
     .then(() => {res.status(201).json({message: 'New user added'})})
     .catch((err) => {next(err)})
 }
+
+module.exports.getUserById = (req, res, next) => {
+    User.findOne({id: req.params.id})
+    .then((data) => {
+        if(!data) {
+            res.status(200).json({message: 'User Not Found'})
+        } else {
+            res.status(200).json(data)
+        }
+    })
+    .catch ((error) => next(error))
+}
