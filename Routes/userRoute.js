@@ -17,6 +17,7 @@ userRouter.route('/users/:id')
         body('email').isEmail().withMessage('Incorrect Email Format'),
         body('password').isStrongPassword().withMessage('You should Enter Strong Password')
     ], validationMiddleware, userController.updateUser)
+    .delete(userController.deleteUser)
 
 
 module.exports = userRouter;

@@ -36,3 +36,15 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((error) => {next(error)})
 }
+
+module.exports.deleteUser = (req, res, next) => {
+    User.deleteOne({id: req.params.id})
+    .then((data) => {
+        if(data.deletedCount == 0) {
+            throw new Error('User Not Found')
+        } else {
+            res.status(200).json({message: 'User Deleted'})
+        }
+    })
+    .catch((error) => next(error));
+}
