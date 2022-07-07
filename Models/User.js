@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const schema = new mongoose.Schema({
     id: {
@@ -29,5 +30,17 @@ const schema = new mongoose.Schema({
         unique: true
     }
 });
+
+schema.pre('save', function(next) {
+    if(!this.isModified('password')) {
+        return next();
+    }
+    bcrypt.hash(this.password, 10)
+    .then(value => {
+        this.password = value;
+        next();
+    })
+    .catch(error => next(error))
+})
 
 module.exports = mongoose.model('users', schema);
