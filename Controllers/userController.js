@@ -17,10 +17,22 @@ module.exports.getUserById = (req, res, next) => {
     User.findOne({id: req.params.id})
     .then((data) => {
         if(!data) {
-            res.status(200).json({message: 'User Not Found'})
+            throw new Error('User Not Found')
         } else {
             res.status(200).json(data)
         }
     })
     .catch ((error) => next(error))
+}
+
+module.exports.updateUser = (req, res, next) => {
+    User.updateOne({id: req.params.id}, {$set: req.body})
+    .then((data) => {
+        if(data.matchedCount == 0) {
+            throw new Error('User Not Found')
+        } else {
+            res.status(200).json({message: 'User Updated'})
+        }
+    })
+    .catch((error) => {next(error)})
 }

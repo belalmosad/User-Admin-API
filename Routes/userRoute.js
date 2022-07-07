@@ -13,6 +13,10 @@ userRouter.route('/users')
 
 userRouter.route('/users/:id')
     .get(userController.getUserById)
+    .put([
+        body('email').isEmail().withMessage('Incorrect Email Format'),
+        body('password').isStrongPassword().withMessage('You should Enter Strong Password')
+    ], validationMiddleware, userController.updateUser)
 
 
 module.exports = userRouter;
