@@ -2,7 +2,7 @@ const express = require('express');
 const userRouter = express.Router();
 const userController = require('../Controllers/userController');
 const validationMiddleware = require('../Middlewares/validationMiddleware');
-const {body} = require('express-validator');
+const { body } = require('express-validator');
 
 userRouter.route('/users')
     .get(userController.getAllUsers)
@@ -11,5 +11,8 @@ userRouter.route('/users')
         body('password').isStrongPassword().withMessage('You should Enter Strong Password')
     ], validationMiddleware, userController.addUser)
 
+userRouter.route('/users/:id')
+    .get(userController.getUserById)
 
-module.exports=userRouter;
+
+module.exports = userRouter;
