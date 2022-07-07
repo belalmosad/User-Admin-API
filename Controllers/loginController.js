@@ -12,8 +12,7 @@ module.exports = (req, res, next) => {
                 .then((isEqual) => {
                     if(isEqual) {
                         let token = jwt.sign({
-                            id: data.id,
-                            role: 'user'
+                            id: data.id
 
                         },process.env.SECRET_KEY, {expiresIn: "2h"})
                         res.status(200).json({message: 'Welcome', token});
