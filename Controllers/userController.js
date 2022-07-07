@@ -18,7 +18,7 @@ module.exports.getUserById = (req, res, next) => {
         if(!data) {
             throw new Error('User Not Found')
         } else {
-            if(req.id == req.params.id) {
+            if(req.id == req.params.id || req.isAdmin) {
                 res.status(200).json(data)
             } else {
                 throw new Error('You are noth authorized to show this data');
