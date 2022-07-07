@@ -3,6 +3,8 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const userRouter = require('./Routes/userRoute');
 const loginRouter = require('./Routes/loginRoute');
+const logsRouter = require('./Routes/logsRoute')
+const storeLogsMiddleware = require('./Middlewares/storeLogsMiddleware');
 const server = express();
 const port = process.env.PORT || 4000;
 require('dotenv').config();
@@ -20,8 +22,10 @@ mongoose.connect(process.env.DB_URL)
 
 // ------------------------------------------------ Routes / Middlewares  --------------------------------
 server.use(express.json());
+server.use(storeLogsMiddleware)
 server.use(userRouter);
 server.use(loginRouter);
+server.use(logsRouter);
 
 
 
