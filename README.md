@@ -14,6 +14,7 @@ API for performing CRUD operations. Main roles are users and admins.
 
 **Admins Can**:
 1. Show logs of the system.
+2. Show other normal users' data (non-admins)
 
 ## Technologies Used:
 * Nodejs and Express as backend framework.
