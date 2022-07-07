@@ -1,8 +1,10 @@
+const { application } = require('express');
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const userRouter = require('./Routes/userRoute');
+const loginRouter = require('./Routes/loginRoute');
 const server = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 require('dotenv').config();
 
 server.listen(port, () => {
@@ -19,6 +21,7 @@ mongoose.connect(process.env.DB_URL)
 // ------------------------------------------------ Routes / Middlewares  --------------------------------
 server.use(express.json());
 server.use(userRouter);
+server.use(loginRouter);
 
 
 
