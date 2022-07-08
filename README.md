@@ -24,7 +24,7 @@ API for performing CRUD operations. Main roles are users and admins.
 * bcrypt for encrypting passwords.
 * Postman for API Testing.
 
-**__NOTE:__** environment variables (DB_URL and SECRET_KEY) are supposed to be in .env file which is ignored by .gitignore file.  
+> **__NOTE:__** environment variables (DB_URL and SECRET_KEY) are supposed to be in .env file which is ignored by .gitignore file.  
 
 
 
